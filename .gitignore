@@ -1,5 +1,11 @@
-*.pyc
+*
+.pyc
+
 __pycache__
+
 venv
+
 .idea
+
 .vscode
+*.pdf

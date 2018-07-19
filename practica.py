@@ -50,6 +50,7 @@ def generar_pdf(datos,fecha,idpres,cliente,raiz):
     Story.append(Spacer(1, 25))
     texto = '-----------------\nFirma Autorizada'
     Story.append(Paragraph(texto, estilos["Normal"]))
-    Story.append(Spacer(1, 12))
+
+    Story.append(Spacer(1, 13))
     doc.build(Story)
     return ruta
