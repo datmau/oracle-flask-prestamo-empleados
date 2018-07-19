@@ -1,0 +1,38 @@
+
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+
+<div class="container">
+  <h2>Tablas Amortizacion</h2>
+  <p>Proceso financiero mediante el cual se extingue, gradualmente, una deuda por medio de pagos periódicos, que pueden ser iguales o diferentes.</p>            
+  <table class="table table-striped">
+  	<thead>
+    	<tr>
+        	<td>Tabla ID</td>
+        	<td>Nombre Tabla</td>
+        	<td>Formula</td>
+            <td>Descripcion</td>
+            <td>Opciones</td>
+        </tr>
+    </thead>
+    <tbody>
+      {% for a in amorti  %}
+        <tr>
+            <td align="center"> {{ a.0 }} </td>
+            <td> {{ a.1 }}</td>
+            <td> {{ a.2 }}</td>
+          <td> {{ a.3 }}</td>
+        <td>
+            <button type="submit" class="btn btn-success">Actualizar</button>
+            <button type="submit" class="btn btn-danger">Borrar</button>
+        </td>
+          </tr>
+     {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+{% include 'footer.html' %}

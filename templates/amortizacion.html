@@ -1,0 +1,22 @@
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+
+<div class="container">
+  <h2>Tablas Amortizacion</h2>
+    <a href="{{ url_for('sel_amort') }}" class=" btn btn-primary">Ver Todos </a><br/><br/>
+  <p>Proceso financiero mediante el cual se extingue, gradualmente, una deuda por medio de pagos periódicos, que pueden ser iguales o diferentes.</p>            
+  <form action="{{ url_for('new_amortizacion') }}" method="POST" >
+    <table class="table table-striped">
+    <tbody>
+        <tr><td>Nombre</td><td><input type="text" placeholder="Nombre Tabla" name="nom" onkeypress="return sololetras(event)" onpaste="return false"/></td></tr>
+        <tr><td>Formula</td><td><input type="text" placeholder="Ecuacion" name="for"/></td></tr>
+        <tr><td>Descripción</td><td><input type="text" placeholder="Información" name="des"/></td></tr>
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-success">Enviar</button>
+  </form>
+</div>
+
+{% endblock %}
+{% include 'footer.html' %}

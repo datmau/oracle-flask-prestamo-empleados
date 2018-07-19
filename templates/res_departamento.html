@@ -1,0 +1,29 @@
+
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+
+<div class="container">
+  <h2>Tablas Departamentos</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID Departamento</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       {% for dep in departamento  %}
+        <tr>
+            <td align="center"> {{ dep.0 }} </td>
+            <td> {{ dep.1 }}</td>
+            <td> {{ dep.2 }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+{% include 'footer.html' %}

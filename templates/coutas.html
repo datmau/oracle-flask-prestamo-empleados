@@ -1,0 +1,58 @@
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+{%with messages = get_flashed_messages()%}
+  {%if messages%}
+    {% for message in messages %}
+    <div class="alert alert-succes alert-dismissable" role="alert">
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+         <span aria-hidden="true">&times;x</span>
+     </button>
+        {{message}}
+    </div>
+    {%endfor%}
+  {%endif%}
+{%endwith%}
+
+    <div class="container">
+  <h2>CUOTAS</h2>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+        <td>Cuota Anual</td>
+        <td>Fecha Pago</td>
+        <td>Interes</td>
+        <td>Amortizacion</td>
+        <td>Cap. x Amortizar</td>
+        <td>Cap. Amoritzado</td>
+    </tr>
+  </thead>
+    <tbody>
+
+      {% for cuota in cuotas %}
+        <tr>
+            <td> {{ cuota.3 }}</td>
+            <td> {{ cuota.2 }}</td>
+            <td> {{ cuota.4 }}</td>
+            <td> {{ cuota.5 }}</td>
+            <td> {{ cuota.6 }}</td>
+            <td> {{ cuota.7 }}</td>
+            <form action="{{ url_for('update_cuota') }}" method="GET">
+                <td>
+                <span class="button-checkbox">
+                    <input type="hidden" value="{{ cuota.0}}" name="cuot_id"/>
+                    <input type="hidden" value="{{ cuota.1}}" name="pres_id"/>
+                    <button type="submit" class="btn btn-primary " data-color="primary"><i class="state-icon glyphicon glyphicon-unchecked">  
+                    </i>&nbsp;Pagar</button>
+                    <input class="hidden" checked="" type="checkbox">
+                </span>
+            </td>
+            </form>
+          </tr>
+     {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+{% include  'footer.html' %}

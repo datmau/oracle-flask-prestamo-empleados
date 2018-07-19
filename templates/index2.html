@@ -1,0 +1,283 @@
+
+{% include "header.html" %}
+
+<link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+{% block body %}
+
+    {% include "navbar.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <h2>LISTA EMPLEADOS <button type="button" class="btn btn-success  pull-right" data-toggle="modal" data-target="#myModal">Datos del empleado</button></h2>
+
+    {%with messages = get_flashed_messages()%}
+    {%if messages%}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissable" role="alert">
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+         <span aria-hidden="true">x</span>
+     </button>
+        {{message}}
+    </div>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+
+
+
+            <table class="table table-striped">
+
+
+                <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Direccion</th>
+              <th>Celular</th>
+              <th>Telefono</th>
+              <th>Email</th>
+              <th>Opciones</th>
+
+
+          </tr>
+                {% for row in empleados %}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.2}}</td>
+                    <td>{{row.3}}</td>
+                    <td>{{row.4}}</td>
+                    <td>{{row.5}}</td>
+                    <td>{{row.6}}</td>
+                    <td>{{row.7}}</td>
+                    <td>{{row.8}}</td>
+                    <td>
+
+
+               <a href="/update/{{ row.0 }}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Actualizar</a>
+                <a href="/delete/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Seguro que desea eliminar {{ row.1 }}?')">Eliminar</a>
+
+                    </td>
+
+                </tr>
+
+   <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+
+   <div class="modal-dialog">
+      <div class="modal-content">
+
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Actualizar Información</h4>
+         </div>
+
+
+         <div class="modal-body">
+
+            <form action="/update/{{ row.0 }}" method="POST">
+
+                <div class="form-group">
+                  <label>Cedula:</label>
+                  <input  type="text" class="form-control" name="id" value="{{row.0}}" disabled onkeypress="return solonumeros(event)" onpaste="return false">
+               </div>
+
+               <div class="form-group">
+                  <label>Nombres:</label>
+                  <input type="text" class="form-control" name="nombres" value="{{row.2}}" onkeypress="return sololetras(event)" onpaste="return false">
+               </div>
+
+               <div class="form-group">
+                  <label>Apellidos:</label>
+                  <input type="text" class="form-control" name="apellidos" value="{{row.3}}" onkeypress="return sololetras(event)" onpaste="return false">
+               </div>
+
+
+                <div class="form-group">
+                 <label>Direccion:</label>
+                  <input type="text" class="form-control" name="direccion" value="{{row.4}}">
+               </div>
+
+                <div class="form-group">
+                  <label>Celular:</label>
+                  <input type="text" class="form-control" name="celular" value="{{row.5}}" onkeypress="return solonumeros(event)" onpaste="return false">
+               </div>
+
+               <div class="form-group">
+                  <label>Telefono:</label>
+                  <input type="text" class="form-control" name="telefono" value="{{row.6}}" onkeypress="return solonumeros(event)" onpaste="return false">
+               </div>
+
+                 <div class="form-group">
+                  <label>Email:</label>
+                  <input type="text" class="form-control" name="email" value="{{row.7}}">
+               </div>
+
+
+
+               <div class="form-group">
+                  <button class="btn btn-primary" type="submit">Guardar</button>
+               </div>
+
+            </form>
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+                {% endfor  %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+<!-- Modal -->
+
+
+<div id="myModal" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Ingrese los datos</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{ url_for('insert') }}" method="POST">
+
+
+               <div class="form-group">
+                  <label>CEDULA:</label>
+                  <input type="text" class="form-control" name="id" required="1" maxlength="10" onkeypress="return solonumeros(event)" onpaste="return false" on>
+               </div>
+                <div class="form-group">
+                  <label>Nombres:</label>
+                  <input type="text" class="form-control" name="nombres" required="1" onkeypress="return sololetras(event)" onpaste="return false">
+               </div>
+            <div class="form-group">
+                  <label>Apellidos:</label>
+                  <input type="text" class="form-control" name="apellidos" required="1" onkeypress="return sololetras(event)" onpaste="return false">
+               </div>
+
+                <div class="form-group">
+                  <label>Direccion:</label>
+                  <input type="text" class="form-control" name="direccion" required="1">
+               </div>
+                <div class="form-group">
+                  <label>Celular:</label>
+                  <input type="text" class="form-control" name="celular" required="1" maxlength="10" onkeypress="return solonumeros(event)" onpaste="return false">
+               </div>
+                <div class="form-group">
+                  <label>Telefono:</label>
+                  <input type="text" class="form-control" name="telefono" required="1" maxlength="7" onkeypress="return solonumeros(event)" onpaste="return false">
+               </div>
+
+                <div class="form-group">
+
+
+                  <label>Email:</label>
+                  <input type="text" class="form-control" name="email" required="1">
+
+
+               </div>
+
+                 <div class="form-group">
+
+
+                  <label>Codigo Departamento:</label>
+                     <select name="dep">
+                         {% for dep in deps %}
+                            <option value="{{ dep.0 }}">{{ dep.1 }}</option>
+                         {% endfor %}
+
+                     </select>
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Ingresar</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+{% include 'validaciones.html' %}
+  {% include "footer.html" %}
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>

@@ -1,0 +1,35 @@
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+
+{% block body %}
+
+    <div class="container">
+  <h2>LISTADO PRESTAMOS</h2>
+     <a href="{{ url_for('ver_prestamos') }}" class=" btn btn-primary">Ver Todos </a><br/><br/>
+  <table class="table table-striped">
+
+    <tbody>
+      {% for prestamo in prestamos  %}
+        <tr>
+            <td> {{ prestamo.0 }} </td>
+            <td> {{ prestamo.1 }}</td>
+            <td> {{ prestamo.2 }}</td>
+            <td> {{ prestamo.3 }}</td>
+            <td> {{ prestamo.4 }}</td>
+            <td> {{ prestamo.5 }}</td>
+        <td>
+            <form action="{{ url_for('ver_cuotas') }}" method="POST">
+                <input type="hidden" name="idp" value="{{ prestamo.0 }}"/>
+                <button type="submit" class="btn btn-success">Ver cuotas</button>
+            </form>
+        </td>
+          </tr>
+     {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+
+{% include 'footer.html' %}

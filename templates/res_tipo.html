@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+<div class="container">
+  <h2>Tablas Tipo</h2>
+  <p></p>
+  <table class="table table-striped">
+  	<thead>
+    	<tr>
+        	<td>Tipo ID</td>
+        	<td>Tipo</td>
+        	<td>Monto</td>
+            <td>Descripcion</td>
+        </tr>
+    </thead>
+    <tbody>
+      {% for tipo in tipos  %}
+        <tr>
+            <td> {{ tipo.0 }} </td>
+            <td> {{ tipo.1 }}</td>
+            <td> {{ tipo.2 }}</td>
+            <td> {{ tipo.3 }}</td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+</div>
+{% endblock %}
+{% include 'footer.html' %}

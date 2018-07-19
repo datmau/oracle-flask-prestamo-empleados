@@ -1,0 +1,86 @@
+<script>
+    function solonumeros(e){
+    key=e.keyCode || e.which;
+    teclado=String.fromCharCode(key);
+    numeros="0123456789";
+    especiales="8-37-38-46"
+    teclado_especial=false;
+
+    for(var i in especiales){
+    if(key==especiales[i]){
+    teclado_especial=true;
+    }
+    }
+    if(numeros.indexOf(teclado)==-1 && !teclado_especial){
+    return false;
+    }
+    }
+</script>
+
+<script>
+    function sololetras(e){
+    key=e.keyCode || e.which;
+    teclado=String.fromCharCode(key).toLowerCase();
+    letras=" abcdefghijklmnopqrstuvwxyz";
+    especiales="8-37-38-46-164";
+    teclado_especial=false;
+    for(var i in especiales){
+    if(key==especiales[i]){
+    teclado_especial=true;break;
+    }
+    }
+    if(letras.indexOf(teclado)==-1 && !teclado_especial){
+    return false;
+    }
+    }
+</script>
+
+<script>
+    function solonumerosd(e){
+    key=e.keyCode || e.which;
+    teclado=String.fromCharCode(key);
+    numeros="0123456789.";
+    especiales="8-37-38-46"
+    teclado_especial=false;
+
+    for(var i in especiales){
+    if(key==especiales[i]){
+    teclado_especial=true;
+    }
+    }
+    if(numeros.indexOf(teclado)==-1 && !teclado_especial){
+    return false;
+    }
+    }
+</script>
+
+ <script type="text/javascript">
+      function validar() {
+        var cad = document.getElementById("ced").value.trim();
+        var total = 0;
+        var longitud = cad.length;
+        var longcheck = longitud - 1;
+
+        if (cad !== "" && longitud === 10){
+          for(i = 0; i < longcheck; i++){
+            if (i%2 === 0) {
+              var aux = cad.charAt(i) * 2;
+              if (aux > 9) aux -= 9;
+              total += aux;
+            } else {
+              total += parseInt(cad.charAt(i)); // parseInt o concatenará en lugar de sumar
+            }
+          }
+
+          total = total % 10 ? 10 - total % 10 : 0;
+
+          if (cad.charAt(longitud-1) == total) {
+            document.getElementById("salida").innerHTML = ("Cedula Válida");
+
+          }else{
+            document.getElementById("salida").innerHTML = ("Cedula Inválida");
+            return window.alert("Cedula Invalida");
+          }
+        }
+      }
+    </script>

@@ -1,0 +1,87 @@
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+
+{% block body %}
+
+    <div class="container">
+  <h2>Ingresar Nuevo Préstamo</h2>
+<a href="{{ url_for('ver_prestamos') }}" class=" btn btn-primary">Ver Todos </a><br/><br/>
+    <form action="{{ url_for('nuevo_prestamo') }}" method="POST">
+  <table class="table table-bordered">
+    <thead>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>Amortización: </td>
+        <td align="center">
+            <select name="amort">
+               {% for am in amorti %}
+                    <option value="{{ am.1 }}">{{ am.0 }}</option>
+               {% endfor %}
+
+            </select>
+        </td>
+      </tr>
+       <tr>
+        <td>Tipo prestamo: </td>
+       <td align="center">
+        <select name="tipo">
+            {% for ti in tipo %}
+                <option value="{{ ti.1 }}">{{ ti.0 }}</option>
+            {% endfor %}
+        </select>
+       <td/>
+      </tr>
+      <tr>
+        <td>Cédula: </td>
+        <td align="center"><input type="text" placeholder="Ingrese su cedula" name="cedula" maxlength="10" onkeypress="return solonumeros(event)" onpaste="return false"></td>
+      </tr>
+      <tr>
+        <td>Fecha: </td>
+        <td align="center"><input type="date" placeholder="Descripción" name="fecha"></td>
+      </tr>
+      <tr>
+        <td>Monto: </td>
+        <td align="center"><input type="text" placeholder="Ingrese el monto del préstamo" name="monto" onkeypress="return solonumerosd(event)" onpaste="return false"></td>
+      </tr>
+      <tr>
+        <td>ESTADO: </td>
+        <td align="center">
+            <select name="estado">
+                <option value="A" selected> ACTIVO</option>
+                <option value="I" > INACTIVO</option>
+            </select>
+        </td>
+      </tr>
+      <tr>
+        <td>COUTAS: </td> <td align="center"><select name="cuotas">
+          <option value="3">Trimestral</option>
+            <option value="6">Semestral</option>
+            <option value="12">Anual</option>
+      </select>
+           </td>
+      </tr>
+        <tr>
+        <td>INTERES: </td>
+            <td align="center">
+           <select name="interes">
+          <option value="5" selected>5%</option>
+            <option value="7">7%</option>
+            <option value="12">12%</option>
+      </select>
+            </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+        <div align="center">
+<button type="submit" class="btn btn-success" >Enviar</button>
+</div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% include 'footer.html' %}

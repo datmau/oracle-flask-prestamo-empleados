@@ -1,0 +1,44 @@
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+<div class="container">
+  <h2>Departamentos</h2> 
+<a href="/sel_depart" class=" btn btn-primary">Ver Todos </a><br/><br/>
+    {%with messages = get_flashed_messages()%}
+    {%if messages%}
+    {% for message in messages %}
+    <div class="alert alert-danger alert-dismissable" role="alert">
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+         <span aria-hidden="true">x</span>
+     </button>
+        {{message}}
+    </div>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+    <form action="{{ url_for('new_dep') }}" method="POST">
+  <table class="table table-bordered">
+    <thead>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>NOMBRE: </td>
+        <td align="center"><input type="text" placeholder="Nombre" name="nombre" onkeypress="return sololetras(event)" onpaste="return false"></td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN: </td>
+        <td align="center"><input tye="text" placeholder="Descripción" name="desc"></td>
+      </tr>
+    </tbody>
+  </table>
+        <div align="center">
+<button type="submit" class="btn btn-success" >Enviar</button>
+</div>
+    </form>
+</div>
+
+
+{% endblock %}
+
+{% include 'footer.html' %}
